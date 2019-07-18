@@ -50,9 +50,7 @@
         </tr>
         @endforeach
     </table>
-    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</a>
+    
 
 
     {!! $usuarios->links() !!}

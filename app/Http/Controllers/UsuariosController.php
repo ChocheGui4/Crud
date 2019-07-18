@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Usuarios;
+use App\Http\Requests\CrearReglas;
 class UsuariosController extends Controller
 {
     /**
@@ -13,7 +14,7 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        $usuarios= Usuarios::latest()->paginate(5);
+        $usuarios= Usuarios::orderBy('id','ASC')->paginate(5);
         return view('usuario.index', compact('usuarios'))
             ->with('i',(request()->input('page',1)-1)*5);
     }
@@ -34,7 +35,7 @@ class UsuariosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CrearReglas $request)
     {
         $request->validate([
             'name' => 'required',
@@ -80,7 +81,7 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CrearReglas $request, $id)
     {
         $request->validate([
             'name' => 'required',
