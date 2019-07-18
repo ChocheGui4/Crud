@@ -46,7 +46,7 @@ class UsuariosController extends Controller
         Usuarios::create($request->all());
    
         return redirect()->route('usuario.index')
-                        ->with('success','User created successfully.');
+                        ->with('success','Usuario creado.');
     }
 
     /**
@@ -68,7 +68,9 @@ class UsuariosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = Usuarios::find($id);
+
+        return view('usuario.edit', compact('usuario'));
     }
 
     /**
@@ -80,7 +82,23 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'apellidos' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+
+        $usuario = Usuarios::find($id);
+        $usuario->name = $request->get('name');
+        $usuario->apellidos = $request->get('apellidos');
+        $usuario->email = $request->get('email');
+        $usuario->email = $request->get('password');
+        $usuario->save();
+
+        return redirect()->route('usuario.index')
+                        ->with('success','Usuario actualizado.');
     }
 
     /**
@@ -91,6 +109,9 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $usuario = Usuarios::find($id);
+        $usuario->delete();
+        return redirect()->route('usuario.index')
+                        ->with('success','Usuario eliminado.');
     }
 }

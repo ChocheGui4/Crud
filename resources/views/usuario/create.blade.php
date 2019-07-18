@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Agregar usuario</h2>
+            <h2>Add New User</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('usuario.index') }}"> Back</a>
@@ -14,7 +14,7 @@
    
 @if ($errors->any())
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <strong>cuidado!</strong> Hay algún problema con tus datos<br><br>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -29,30 +29,30 @@
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nombre:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Nombre">
+                <strong>Name:</strong>
+                <input type="text" name="name" class="form-control" placeholder="Juana">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Apellidos:</strong>
-                <input type="text" name="apellidos" class="form-control" placeholder="Apellidos">
+                <input type="text" name="apellidos" class="form-control" placeholder="Juárez">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Correo:</strong>
-                <input type="text" name="email" class="form-control" placeholder="Correo">
+                <strong>Email:</strong>
+                <input type="text" name="email" class="form-control" placeholder="juanajua@algo.com">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Contraseña:</strong>
-                <input type="text" name="password" class="form-control" placeholder="Contraseña">
+                <input type="password" name="password" class="form-control" placeholder="secreta">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-danger">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
    
