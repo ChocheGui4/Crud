@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use Illuminate\Http\Request;
 use App\Usuarios;
+use App\Direccion;
 use App\Http\Requests\CrearReglas;
 class UsuariosController extends Controller
 {
@@ -14,8 +15,17 @@ class UsuariosController extends Controller
      */
     public function index()
     {
+        $resultados = DB::table('usuarios')
+        ->join('direccions','direccions.id', '=','usuarios.direccion_id')
+        ->select('usuarios.name','usuarios.apellidos','usuarios.email','usuarios.password','direccions.calle')
+        ->get();
+        $res=json_encode($resultados);
+        //dd($res);
+
+        
+        
         $usuarios= Usuarios::orderBy('id','ASC')->paginate(5);
-        return view('usuario.index', compact('usuarios'))
+        return view('usuario.index', compact('usuarios','res'))
             ->with('i',(request()->input('page',1)-1)*5);
     }
 

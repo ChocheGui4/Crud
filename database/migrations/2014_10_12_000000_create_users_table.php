@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email');            
             $table->string('password');
             $table->integer('direccion_id');
-            $table->foreign('direccion_id')->references('id')->on('direcciones');
+            $table->foreign('direccion_id')->references('id')->on('direccions');
             $table->timestamps();
         });
     }

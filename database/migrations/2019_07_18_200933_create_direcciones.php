@@ -13,7 +13,7 @@ class CreateDirecciones extends Migration
      */
     public function up()
     {
-        Schema::create('direcciones', function (Blueprint $table) {
+        Schema::create('direccions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('calle');
             $table->string('numero');

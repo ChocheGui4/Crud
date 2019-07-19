@@ -25,8 +25,13 @@
             <th>Apellidos</th>
             <th>Email</th>
             <th>Contraseña</th>
+            <th>Calle</th>
+            <th>Número</th>
+            <th>Colonia</th>
+            <th>Delegación</th>
             
         </tr>
+        
         @foreach ($usuarios as $usuario)
         <tr>
             <td>{{ ++$i }}</td>
@@ -34,6 +39,9 @@
             <td>{{ $usuario->apellidos }}</td>
             <td>{{ $usuario->email }}</td>
             <td>{{ $usuario->password }}</td>
+            
+            
+            
             <td>
                 <form action="{{ route('usuario.destroy',$usuario->id) }}" method="POST">
    
