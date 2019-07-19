@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Direccion;
+use DB;
 class DireccionesController extends Controller
 {
     public function index()
@@ -20,7 +21,7 @@ class DireccionesController extends Controller
      */
     public function create()
     {
-        
+        return view('direccion.create');
     }
 
     /**
@@ -31,7 +32,18 @@ class DireccionesController extends Controller
      */
     public function store(Request $request)
     {
-    
+        $request->validate([
+            'calle' => 'required',
+            'numero' => 'required',
+            'colonia' => 'required',
+            'delegacion' => 'required',
+            'usuarios_id' => 'required',
+        ]);
+  
+        Direccion::create($request->all());
+   
+        return redirect()->route('usuario.index')
+                        ->with('success','Usuario creado con éxito.');
     }
 
     /**
@@ -54,6 +66,15 @@ class DireccionesController extends Controller
     public function edit($id)
     {
         
+        $direccion=Direccion::where("usuarios_id","=",$id)->get();
+
+        /*$res = DB::table('usuarios')
+        ->join('direccions','usuarios.id', '=','direccions.usuarios_id')
+        ->select()->where('usuarios_id',$id)->get();*/
+        
+        
+
+        return view('direccion.edit', compact('direccion'));
     }
 
     /**
@@ -65,7 +86,24 @@ class DireccionesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'calle' => 'required',
+            'numero' => 'required',
+            'colonia' => 'required',
+            'delegacion' => 'required',
+            'usuarios_id' => 'required'
+        ]);
+        $direccion = Direccion::find($id);
+        $direccion->calle = $request->get('calle');
+        $direccion->numero = $request->get('numero');
+        $direccion->colonia = $request->get('colonia');
+        $direccion->delegacion = $request->get('delegacion');
+        $direccion->usuarios_id = $request->get('usuarios_id');
+        $direccion->save();
+
         
+        return redirect()->route('usuario.index')
+                        ->with('success','Usuario actualizado.');
     }
 
     /**

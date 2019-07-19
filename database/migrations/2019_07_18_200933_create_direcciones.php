@@ -19,6 +19,8 @@ class CreateDirecciones extends Migration
             $table->string('numero');
             $table->string('colonia');            
             $table->string('delegacion');
+            $table->integer('usuarios_id');
+            $table->foreign('usuarios_id')->references('id')->on('usuarios');
             $table->timestamps();
         });
     }

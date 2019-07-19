@@ -25,7 +25,7 @@ class CrearReglas extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:30|regex:/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/',
-            'apellidos' => 'required|max:30|regex:/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/',
+            'apellidos' => 'required|min:3|max:40|regex:/^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/',
             'email' => 'required|regex:/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/',
             'password' => 'required|string|max:20'
         ];

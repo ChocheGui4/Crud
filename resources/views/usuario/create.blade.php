@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New User</h2>
+            <h2>Agregar nuevo usuario</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('usuario.index') }}"> Back</a>
@@ -51,8 +51,9 @@
                 <input type="password" name="password" class="form-control" placeholder="secreta">
             </div>
         </div>
+       
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-warning">Siguiente (datos de dirección)</button>
         </div>
     </div>
    

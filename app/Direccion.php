@@ -11,6 +11,6 @@ class Direccion extends Model
 		return $this->hasMany(Usuarios::class);
 	}
     protected $fillable = [
-        'calle', 'numero','colonia', 'delegacion',
+        'calle', 'numero','colonia', 'delegacion','usuarios_id'
     ];
 }

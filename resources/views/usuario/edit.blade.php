@@ -13,7 +13,7 @@
       <div class="col-4">
         <div class="pull-left">
           <h2>
-            Editar 
+            Editar usuario
           </h2>    
         </div>
       </div>
@@ -34,6 +34,7 @@
         </ul>
       </div><br />
     @endif
+    @foreach ($res as $r)
       <form method="post" action="{{ route('usuario.update', $usuario->id) }}">
         @method('PATCH')
         @csrf
@@ -53,11 +54,13 @@
           <label for="quantity">Contraseña:</label>
           <input type="text" class="form-control" name="password" value={{ $usuario->password }} />
         </div>
+   
             <div class="pull-left">
-            <button type="submit" class="btn btn-primary">Modificar</button>
+            <button type="submit" class="btn btn-primary">Modificar </button>
             </div>
          
       </form>
+      @endforeach
   </div>
 </div>
 @endsection

@@ -15,3 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 route::resource('usuario','UsuariosController');
+route::resource('direccion','DireccionesController');

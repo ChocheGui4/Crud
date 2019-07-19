@@ -26,9 +26,7 @@
             <th>Email</th>
             <th>Contraseña</th>
             <th>Calle</th>
-            <th>Número</th>
-            <th>Colonia</th>
-            <th>Delegación</th>
+
             
         </tr>
         
@@ -42,12 +40,17 @@
             
             
             
+            
+            
+            
+            
             <td>
                 <form action="{{ route('usuario.destroy',$usuario->id) }}" method="POST">
    
-                    
+                    <a class="btn btn-warning" href="{{ route('usuario.show',$usuario->id) }}">Ver</a>
     
                     <a class="btn btn-primary" href="{{ route('usuario.edit',$usuario->id) }}">Editar</a>
+                    
    
                     @csrf
                     @method('DELETE')

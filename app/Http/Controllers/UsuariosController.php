@@ -15,17 +15,14 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        $resultados = DB::table('usuarios')
-        ->join('direccions','direccions.id', '=','usuarios.direccion_id')
-        ->select('usuarios.name','usuarios.apellidos','usuarios.email','usuarios.password','direccions.calle')
-        ->get();
-        $res=json_encode($resultados);
-        //dd($res);
-
+        /*$usuarios = DB::table('usuarios')
+        ->join('direccions','usuarios.id', '=','direccions.usuarios_id')
+        ->select()
+        ->get();*/
         
         
         $usuarios= Usuarios::orderBy('id','ASC')->paginate(5);
-        return view('usuario.index', compact('usuarios','res'))
+        return view('usuario.index', compact('usuarios'))
             ->with('i',(request()->input('page',1)-1)*5);
     }
 
@@ -53,11 +50,15 @@ class UsuariosController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
-  
+        
         Usuarios::create($request->all());
-   
-        return redirect()->route('usuario.index')
-                        ->with('success','Usuario creado.');
+        
+        $ided= Usuarios::latest('id')->first();
+        $r=$ided->id;
+        
+        return redirect()->route('direccion.create')
+                        ->with('success','Usuario creado.')
+                        ->with('id',$r);
     }
 
     /**
@@ -68,7 +69,9 @@ class UsuariosController extends Controller
      */
     public function show($id)
     {
-        //
+        $usuario = Usuarios::find($id);
+        $res=Direccion::where("usuarios_id","=",$id)->get();
+        return view('usuario.show', compact('usuario','res'));
     }
 
     /**
@@ -80,8 +83,16 @@ class UsuariosController extends Controller
     public function edit($id)
     {
         $usuario = Usuarios::find($id);
+        $res=Direccion::where("usuarios_id","=",$id)->get();
+        
+        //dd($usuario);
 
-        return view('usuario.edit', compact('usuario'));
+        /*$usuario = DB::table('usuarios')
+        ->join('direccions','usuarios.id', '=','direccions.usuarios_id')
+        ->select()
+        ->where('usuarios_id', $id);
+        dd($usuario);*/
+        return view('usuario.edit', compact('usuario','res'));
     }
 
     /**
@@ -93,23 +104,24 @@ class UsuariosController extends Controller
      */
     public function update(CrearReglas $request, $id)
     {
+
         $request->validate([
             'name' => 'required',
             'apellidos' => 'required',
             'email' => 'required',
             'password' => 'required'
         ]);
-
-
         $usuario = Usuarios::find($id);
         $usuario->name = $request->get('name');
         $usuario->apellidos = $request->get('apellidos');
         $usuario->email = $request->get('email');
-        $usuario->email = $request->get('password');
+        $usuario->password = $request->get('password');
         $usuario->save();
 
-        return redirect()->route('usuario.index')
+
+        return redirect()->route('direccion.edit',$id)
                         ->with('success','Usuario actualizado.');
+
     }
 
     /**
@@ -120,6 +132,9 @@ class UsuariosController extends Controller
      */
     public function destroy($id)
     {
+        //$direccion=Direccion::find(11);
+        $res=Direccion::where("usuarios_id","=",$id);
+        $res->delete();
         $usuario = Usuarios::find($id);
         $usuario->delete();
         return redirect()->route('usuario.index')
