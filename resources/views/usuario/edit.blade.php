@@ -38,7 +38,7 @@
         @method('PATCH')
         @csrf
         <div class="form-group">
-          <label for="name">Nombre:</label>
+          <label for="name">Nombre::</label>
           <input type="text" class="form-control" name="name" value={{ $usuario->name }} />
         </div>
         <div class="form-group">
